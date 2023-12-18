@@ -3,27 +3,22 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        OperasiMatriks oprmatriks = new OperasiMatriks();
 
-        System.out.print("Masukkan jumlah baris: ");
-        int row = scanner.nextInt();
-        System.out.print("Masukkan jumlah kolom: ");
-        int column = scanner.nextInt();
-        int[][] matriks = new int[row][column];
+        System.out.println("Operasi matriks");
+        System.out.println("1. Penjumlahan");
+        System.out.println("2. Pengurangan");
+        System.out.println("3. Perkalian");
+        System.out.println("4. Transpose");
+        System.out.println("5. Determinan");
+        System.out.println("6. OBE");
+        System.out.print("Masukkan pilihan");
+        int pilihan = scanner.nextInt();
 
-        System.out.println("Masukkan nilai matriks");
-        for (int i = 0; i < row; i++){
-            for (int j = 0; j < column; j++){
-                System.out.print("Masukkan nilai pada baris ke " + (i + 1) + " kolom ke " + (j + 1) + " :");
-                matriks[i][j] = scanner.nextInt();
-            }
-        }
-
-        System.out.println("Matriks: ");
-        for (int i = 0; i < row; i++){
-            for (int j = 0; j < column; j++){
-                System.out.print(matriks[i][j] + " ");
-            }
-            System.out.println();
+        switch (pilihan){
+            case 1:
+                oprmatriks.inputJumlahMatriks();
+                break;
         }
     }
 }

@@ -132,6 +132,9 @@ public class Main {
                     int determinan = oprmatriks.determinanMatriks(detMatrix);
                     System.out.println("Determinan matriks: " + determinan);
                     break;
+                case 6:
+                    System.out.println("Coming Soon OBE");
+                    break;
             }
         } while (pilihan != 0);
     }

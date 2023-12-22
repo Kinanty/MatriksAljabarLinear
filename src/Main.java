@@ -133,9 +133,18 @@ public class Main {
                     System.out.println("Determinan matriks: " + determinan);
                     break;
                 case 6:
-                    System.out.println("Coming Soon OBE");
-                    break;
-            }
+                    System.out.print("Masukkan jumlah baris matriks: ");
+                    row = scanner.nextInt();
+                    System.out.print("Masukkan jumlah kolom matriks: ");
+                    column = scanner.nextInt();
+
+                    int[][] ObeMatriks = new int[row][column];
+                    System.out.println("Masukkan elemen-elemen matriks:");
+                    for (int i = 0; i < row; i++) {
+                        for (int j = 0; j < column; j++) {
+                            System.out.print("Elemen baris ke-[" + (i + 1) + "] kolom ke-[" + (j + 1) + "]: ");
+                            break;
+                        }
         } while (pilihan != 0);
     }
 }

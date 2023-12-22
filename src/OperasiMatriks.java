@@ -109,6 +109,7 @@ public class OperasiMatriks {
         }
         return determinanMatriks(cofactor);
     }
+
     public void printMatriks(int[][] matriks){
         for (int[] row : matriks){
             for (int value : row){

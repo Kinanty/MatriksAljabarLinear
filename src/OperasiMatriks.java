@@ -1,66 +1,121 @@
 import java.util.Scanner;
 
 public class OperasiMatriks {
-    public Scanner scanner = new Scanner(System.in);
-    public int[][] inputNilaiMatriks(int rows, int columns, Scanner scanner) {
-        int[][] matrix = new int[rows][columns];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                System.out.print("Masukkan elemen pada posisi [" + (i + 1) + "][" + (j + 1) + "]: ");
-                matrix[i][j] = scanner.nextInt();
-            }
-        }
-        return matrix;
-    }
-    public void inputJumlahMatriks(){
-        System.out.print("Masukkan jumlah matriks yang akan dijumlahkan: ");
-        int numMatrices = scanner.nextInt();
+    Scanner scanner = new Scanner(System.in);
 
-        // Memasukkan ukuran matriks
-        System.out.print("Masukkan jumlah baris matriks: ");
-        int rows = scanner.nextInt();
+    public int[][] penjumlahanMatriks(int[][][] matriks){
+        int row = matriks[0].length;
+        int column = matriks[0][0].length;
+        int[][] hasil = new int[row][column];
 
-        System.out.print("Masukkan jumlah kolom matriks: ");
-        int columns = scanner.nextInt();
-
-        // Membuat array untuk menyimpan matriks-matriks
-        int[][][] matrices = new int[numMatrices][rows][columns];
-
-        // Memasukkan elemen-elemen matriks
-        for (int k = 0; k < numMatrices; k++) {
-            System.out.println("Masukkan elemen-elemen matriks ke-" + (k + 1) + ":");
-            matrices[k] = inputNilaiMatriks(rows, columns, scanner);
-        }
-
-        // Menjumlahkan matriks
-        int[][] sumMatrix = addMatrices(matrices);
-
-        // Menampilkan hasil penjumlahan
-        System.out.println("Hasil penjumlahan matriks:");
-        printMatrix(sumMatrix);
-    }
-    public int[][] addMatrices(int[][][] matrices) {
-        int numMatrices = matrices.length;
-        int rows = matrices[0].length;
-        int columns = matrices[0][0].length;
-        int[][] result = new int[rows][columns];
-
-        for (int k = 0; k < numMatrices; k++) {
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < columns; j++) {
-                    result[i][j] += matrices[k][i][j];
+        for(int indexMatriks = 0; indexMatriks < matriks.length; indexMatriks++){
+            for (int i = 0; i < row; i++){
+                for(int j = 0; j < column; j++){
+                    hasil[i][j] += matriks[indexMatriks][i][j];
                 }
             }
         }
-
-        return result;
+        return hasil;
     }
-    public void printMatrix(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                System.out.print(matrix[i][j] + " ");
+
+    public int[][] penguranganMatriks(int[][][] matriks){
+        int row = matriks[0].length;
+        int column = matriks[0][0].length;
+        int[][] hasil = new int[row][column];
+
+        for (int indexMatriks = 0; indexMatriks < matriks.length; indexMatriks++){
+            for (int i = 0; i < row; i++){
+                for (int j = 0; j < column; j++){
+                    if (indexMatriks == 0){
+                        hasil[i][j] = matriks[0][i][j];
+                    }else {
+                        hasil[i][j] -= matriks[indexMatriks][i][j];
+                    }
+                }
+            }
+        }
+        return hasil;
+    }
+
+    public int[][] perkalianMatriks(int[][][] matriks){
+        int row = matriks[0].length;
+        int column = matriks[0][0].length;
+        int[][] hasil = new int[row][column];
+
+        for (int indexMatriks = 0; indexMatriks < matriks.length; indexMatriks++){
+            for (int i = 0; i < row; i++){
+                for (int j = 0; j < column; j++){
+                    if (indexMatriks == 0){
+                        hasil[i][j] = matriks[0][i][j];
+                    }else {
+                        hasil[i][j] *= matriks[indexMatriks][i][j];
+                    }
+                }
+            }
+        }
+        return hasil;
+    }
+
+    public int[][] transposeMatriks(int[][] matriks){
+        int row = matriks.length;
+        int column = matriks[0].length;
+        int[][] transposedMatrix = new int[column][row];
+
+        for (int i = 0; i < row; i++){
+            for (int j = 0; j < column; j++){
+                transposedMatrix[j][i] = matriks[i][j];
+            }
+        }
+        return transposedMatrix;
+    }
+
+    public int determinanMatriks(int[][] matriks){
+        int n =  matriks.length;
+
+        // jika matriks 1 x 1
+        if (n == 1) {
+            return matriks[0][0];
+        }
+
+        int determinant = 0;
+
+        for (int i = 0; i < n; i++){
+            determinant += matriks[0][i] * getCofactor(matriks, 0, i) * Math.pow(-1, i);
+        }
+
+        return determinant;
+    }
+    public int getCofactor(int[][] matriks, int row, int col) {
+        int n = matriks.length - 1;
+        int[][] cofactor = new int[n][n];
+
+        int iCofactor = 0;
+        int jCofactor = 0;
+
+        for (int i = 0; i < matriks.length; i++){
+            if (i == row) continue;
+
+            for(int j = 0; j < matriks[i].length; j++){
+                if (j == col) continue;
+
+                cofactor[iCofactor][jCofactor] = matriks[i][j];
+                jCofactor++;
+
+                if (jCofactor == n){
+                    jCofactor = 0;
+                    iCofactor++;
+                }
+            }
+        }
+        return determinanMatriks(cofactor);
+    }
+    public void printMatriks(int[][] matriks){
+        for (int[] row : matriks){
+            for (int value : row){
+                System.out.print(value + " ");
             }
             System.out.println();
         }
+        System.out.println();
     }
 }

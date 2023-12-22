@@ -145,6 +145,8 @@ public class Main {
                             System.out.print("Elemen baris ke-[" + (i + 1) + "] kolom ke-[" + (j + 1) + "]: ");
                             break;
                         }
-        } while (pilihan != 0);
+                    }
+            }
+        }while (pilihan != 0) ;
     }
 }
